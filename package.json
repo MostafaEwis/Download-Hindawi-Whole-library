@@ -1,6 +1,9 @@
 {
   "dependencies": {
+    "dotenv": "^16.0.3",
     "selenium-webdriver": "^4.8.2"
   },
-"scripts": {"start": "node script.js"}
+  "scripts": {
+    "start": "node script.js"
+  }
 }

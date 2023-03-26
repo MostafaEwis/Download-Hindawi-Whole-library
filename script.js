@@ -1,9 +1,8 @@
 const { Builder, By } = require("selenium-webdriver");
 const chrome = require("selenium-webdriver/chrome");
+require("dotenv").config();
 // حط الـ file path  هنا يا عموري
-const service = new chrome.ServiceBuilder(
-  "C:/Users/mosta/Downloads/Drivers/chromedriver.exe"
-);
+const service = new chrome.ServiceBuilder(process.env.ChromeDriverPath);
 const driver = new Builder()
   .forBrowser("chrome")
   .setChromeService(service)
