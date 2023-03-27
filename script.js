@@ -9,8 +9,17 @@ const driver = new Builder()
 const happen = async () => {
   driver.get("https://www.hindawi.org/books");
   await driver.manage().setTimeouts({ implicit: 5000 });
+  booksCount = await driver.findElement(By.className("count")).getText();
+  let pages;
+  booksCount = booksCount.split("");
+  for (let i = 0; i < booksCount.length; i++) {
+    booksCount[i] = String.fromCodePoint(booksCount[i].codePointAt() - 1584);
+  }
+  booksCount = booksCount.join("");
+  booksCount = parseInt(booksCount);
+  pages = (booksCount - (booksCount % 20)) / 20 + (booksCount % 20 > 0 ? 1 : 0);
   // اللوب دي بتلف على صفحات الكتب كلها جبت عددهم من هنداوي
-  for (let i = 0; i < 149; i++) {
+  for (let page = 0; page < pages; page++) {
     // دي لستة الكتب
     let books = await driver.findElements(By.className("link"));
     // ده الزرار اللي بينقلنا لصفحة الكتب الجاية
